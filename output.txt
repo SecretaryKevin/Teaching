@@ -1,1 +1,2 @@
-6, Six, Five, four, three, two, one,
+01 Jan 2010 = 30.00
+02 Jan 2010 = 115.30
