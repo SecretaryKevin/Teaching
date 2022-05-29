@@ -1,6 +1,4 @@
-import math
 import numpy as np
-import matplotlib.pyplot as plt
 
 
 def times_across_day(days):

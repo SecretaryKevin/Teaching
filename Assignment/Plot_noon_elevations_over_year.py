@@ -61,7 +61,6 @@ def plot_noon_elevations_over_year(latitude):
     plt.title(f"daily noon solar elevations for latitude={round(latitude, 2)}")
     plt.grid()
     plt.show()
-    print(solar_elevation(latitude, np.arange(0, 364), 364))
 
 
 plot_noon_elevations_over_year(-43.52565)
