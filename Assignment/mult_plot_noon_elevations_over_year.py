@@ -5,11 +5,6 @@ from datetime import date, timedelta
 
 
 def nice_date_str(day_num):
-    """
-    Return a nice string representation of a day number
-    :param day_num: number of days since the start of the year
-    :return:
-    """
     day_num = int(day_num)
     base_date = date(2022, 1, 1)
     delta = timedelta(days=day_num)
@@ -53,24 +48,18 @@ def asin_d(n):
     return np.degrees(np.arcsin(n))
 
 
-def plot_elevation_over_day(latitude, day_num, number_of_points):
-    """
-    Plot the elevation of the sun over the day
-    :param latitude: latitude in degrees
-    :param day_num: number of days since the start of the year
-    :param number_of_points: number of points to plot
-    :return:
-    """
-    number_of_points = np.linspace(0, 24, number_of_points)
-    elevation = solar_elevation(latitude, day_num, number_of_points)
-    plt.plot(number_of_points, elevation, color='orange', linestyle="", marker="o", markersize=10)
-    plt.xticks(np.arange(0, 24 + 1, 1))
+def multi_plot_noon_elevations_over_year(latitude):
+    counter = 0
+    while len(latitude) != counter:
+        elevations = solar_elevation(latitude[counter], np.arange(0, 364), 12)
+        plt.plot(np.arange(0, 364), elevations, linestyle="-")
+        counter = counter + 1
+    plt.xticks(np.arange(0, 360 + 1, 30))
     plt.yticks(np.arange(-90, 90 + 1, 10))
-    plt.xlabel("Solar Hours")
-    plt.ylabel("Solar Elevation (degrees)")
-    plt.title(f"Solar elevations for day={nice_date_str(day_num)}, latitude={round(latitude, 2)}")
+    plt.xlabel("day")
+    plt.ylabel("noon Solar Elevation (degrees)")
     plt.grid()
     plt.show()
 
 
-plot_elevation_over_day(-43.52565, 0, 25)
+multi_plot_noon_elevations_over_year([-90, -60, -30, 0])
