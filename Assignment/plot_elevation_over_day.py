@@ -1,4 +1,3 @@
-import math
 import numpy as np
 import matplotlib.pyplot as plt
 from datetime import date, timedelta
@@ -61,16 +60,22 @@ def plot_elevation_over_day(latitude, day_num, number_of_points):
     :param number_of_points: number of points to plot
     :return:
     """
-    number_of_points = np.linspace(0, 24, number_of_points)
+
+    number_of_points = times_across_day(number_of_points)
     elevation = solar_elevation(latitude, day_num, number_of_points)
     plt.plot(number_of_points, elevation, color='orange', linestyle="", marker="o", markersize=10)
     plt.xticks(np.arange(0, 24 + 1, 1))
     plt.yticks(np.arange(-90, 90 + 1, 10))
     plt.xlabel("Solar Hours")
     plt.ylabel("Solar Elevation (degrees)")
-    plt.title(f"Solar elevations for day={nice_date_str(day_num)}, latitude={round(latitude, 2)}")
+    plt.title(f"Solar elevations for day={nice_date_str(day_num)}, latitude={np.around(latitude, 2)})")
     plt.grid()
     plt.show()
 
 
-plot_elevation_over_day(-43.52565, 0, 25)
+def times_across_day(days):
+    """"Returns a numpy array of evenly spaced times between 0 and 24 inclusive"""
+    return np.linspace(0, 24, days)
+
+
+plot_elevation_over_day(68, 0, 25)

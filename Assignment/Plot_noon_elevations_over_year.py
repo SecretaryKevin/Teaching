@@ -62,5 +62,8 @@ def plot_noon_elevations_over_year(latitude):
     plt.grid()
     plt.show()
 
+def times_across_day(days):
+    """"Returns a numpy array of evenly spaced times between 0 and 24 inclusive"""
+    return np.linspace(0, 24, days)
 
 plot_noon_elevations_over_year(-43.52565)

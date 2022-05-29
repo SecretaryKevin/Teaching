@@ -49,14 +49,11 @@ def asin_d(n):
 
 
 def mult_plot_elevations_over_days(latitude, day_num, number_of_points):
-    counter = 0
-    elevations = []
     number_of_points = np.linspace(0, 24, number_of_points)
-    while len(day_num) != counter:
-        elevations.append(solar_elevation(latitude, day_num[counter], number_of_points))
-        plt.plot(number_of_points, elevations[counter], label=f"{nice_date_str(day_num[counter])}", linestyle="-",
-                 marker=None, )
-        counter = counter + 1
+    for data in day_num:
+        elevation =(solar_elevation(latitude, data, number_of_points))
+        plt.plot(number_of_points, elevation, label=f"{nice_date_str(data)}", linestyle="-",
+                 marker=None)
     """start of the plot"""
     plt.xticks(np.arange(0, 24 + 1, 1))
     plt.yticks(np.arange(-90, 90 + 1, 10))
@@ -64,9 +61,8 @@ def mult_plot_elevations_over_days(latitude, day_num, number_of_points):
     plt.ylabel("Solar Elevation (degrees)")
     plt.title(f"Solar elevations for latitude={round(latitude, 2)}")
     plt.legend()
-
     plt.grid()
     plt.show()
 
 
-mult_plot_elevations_over_days(-43.525650, [0, 90, 180, 270], 25)
+mult_plot_elevations_over_days(-43.525650, [90, 180, 270], 25)
